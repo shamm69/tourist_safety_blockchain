@@ -1,0 +1,1258 @@
+{
+  "contractAddress": "0xce0e645a373899fc40f52170a3c2c5945b1d2b3b",
+  "network": {
+    "name": "sepolia",
+    "chainId": 11155111,
+    "rpcUrl": "https://sepolia.infura.io/v3/YOUR_INFURA_KEY",
+    "blockExplorer": "https://sepolia.etherscan.io"
+  },
+  "roles": {
+    "TOURISM_OFFICER": "0x2841745a47e80081fb8621f01a21e95680bb2d4ca2ab3ea5a5359fd5de0a26e7",
+    "POLICE_OFFICER": "0x6e8f2016dfffba9828675e1d1ad5dffe94f7fb482f67ff14979af590bfda950d",
+    "EMERGENCY_RESPONDER": "0x9c970ec92ab9cdbb82793d6c1b0d367f91f85e69e38c39af836793b901da8613"
+  },
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "alertId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "alertType",
+          "type": "string"
+        }
+      ],
+      "name": "EmergencyAlertTriggered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "alertId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "responder",
+          "type": "address"
+        }
+      ],
+      "name": "EmergencyResolved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "location",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LocationUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "newScore",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum TouristSafetySystem.SafetyLevel",
+          "name": "newLevel",
+          "type": "uint8"
+        }
+      ],
+      "name": "SafetyScoreUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "passportNumber",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "registeredBy",
+          "type": "address"
+        }
+      ],
+      "name": "TouristRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum TouristSafetySystem.TouristStatus",
+          "name": "newStatus",
+          "type": "uint8"
+        }
+      ],
+      "name": "TouristStatusChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "EMERGENCY_RESPONDER",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "POLICE_OFFICER",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TOURISM_OFFICER",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "aadhaarToTouristId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "activeTourists",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        }
+      ],
+      "name": "checkOutTourist",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "emergencyAlerts",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getActiveTourists",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getEmergencyAlerts",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getLocationHistory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "touristId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "coordinates",
+              "type": "string"
+            },
+            {
+              "internalType": "uint8",
+              "name": "batteryLevel",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "isEmergency",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct TouristSafetySystem.LocationUpdate[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalTourists",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTouristAlerts",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "alertId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "touristId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "alertType",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bool",
+              "name": "isResolved",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "responderAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "responseTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct TouristSafetySystem.EmergencyAlert[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTouristById",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "touristId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "passportNumber",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "aadhaarHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "fullName",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "phoneNumber",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "nationality",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "checkInTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "checkOutTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "plannedItinerary",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "emergencyContact",
+              "type": "string"
+            },
+            {
+              "internalType": "enum TouristSafetySystem.TouristStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "safetyScore",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum TouristSafetySystem.SafetyLevel",
+              "name": "safetyLevel",
+              "type": "uint8"
+            },
+            {
+              "internalType": "string",
+              "name": "lastKnownLocation",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "lastLocationUpdate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "realTimeTrackingEnabled",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isActive",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct TouristSafetySystem.TouristID",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_passportNumber",
+          "type": "string"
+        }
+      ],
+      "name": "getTouristByPassport",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum TouristSafetySystem.SafetyLevel",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "getTouristsBySafetyLevel",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRoleToAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "locationHistory",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "location",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "coordinates",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "batteryLevel",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bool",
+          "name": "isEmergency",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        }
+      ],
+      "name": "markTouristMissing",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "officerAssignments",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "name": "passportToTouristId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_passportNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_aadhaarHash",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_fullName",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_phoneNumber",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_nationality",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_plannedItinerary",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_emergencyContact",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_checkOutTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "registerTourist",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_alertId",
+          "type": "uint256"
+        }
+      ],
+      "name": "resolveEmergencyAlert",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRoleFromAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_enabled",
+          "type": "bool"
+        }
+      ],
+      "name": "toggleRealTimeTracking",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "touristAlerts",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "alertId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "location",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "alertType",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "isResolved",
+          "type": "bool"
+        },
+        {
+          "internalType": "address",
+          "name": "responderAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "responseTime",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "tourists",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "passportNumber",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "aadhaarHash",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "fullName",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "phoneNumber",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "nationality",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "checkInTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "checkOutTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "plannedItinerary",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "emergencyContact",
+          "type": "string"
+        },
+        {
+          "internalType": "enum TouristSafetySystem.TouristStatus",
+          "name": "status",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "safetyScore",
+          "type": "uint8"
+        },
+        {
+          "internalType": "enum TouristSafetySystem.SafetyLevel",
+          "name": "safetyLevel",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "lastKnownLocation",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastLocationUpdate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "realTimeTrackingEnabled",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_alertType",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_currentLocation",
+          "type": "string"
+        }
+      ],
+      "name": "triggerEmergencyAlert",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_location",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_coordinates",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_batteryLevel",
+          "type": "uint8"
+        }
+      ],
+      "name": "updateLocation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_touristId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_passportNumber",
+          "type": "string"
+        }
+      ],
+      "name": "verifyTourist",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
